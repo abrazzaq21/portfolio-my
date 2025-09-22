@@ -1,176 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Abdul Razzaq | Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdul Razzaq | Visual Merchandiser & Power BI Portfolio</title>
+
+    <!-- Google Fonts & Bootstrap Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        /* --- CSS RESET & BASE --- */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg-color: #111111;
+            --primary-text-color: #EAEAEA;
+            --secondary-text-color: #A0A0A0;
+            --card-bg-color: #1a1a1a;
+            --card-border-color: #2a2a2a;
+            --accent-color: #8A2BE2;
+            --accent-gradient: linear-gradient(135deg, #8A2BE2, #4B0082);
+            --font-family: 'Poppins', sans-serif;
+        }
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--primary-text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        a { text-decoration: none; color: inherit; }
+
+        /* --- HEADER --- */
+        header { position: fixed; top: 0; left: 0; width: 100%; padding: 20px 0; z-index: 1000; transition: all 0.3s ease; background: var(--bg-color);}
+        header.scrolled { background-color: rgba(26,26,26,0.9); backdrop-filter: blur(10px); padding: 15px 0; }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+        header h1 { font-size: 2rem; font-weight: 700; color: var(--accent-color); display: inline; }
+        header p { color: var(--secondary-text-color); margin: 5px 0 0 0; }
+        nav { margin-top: 10px; }
+        nav ul { display: flex; list-style: none; justify-content: center; gap: 30px; }
+        nav a { color: var(--primary-text-color); font-weight: 500; position: relative; }
+        nav a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 50%; transform: translateX(-50%); background: var(--accent-gradient); transition: width 0.3s ease; }
+        nav a:hover::after { width: 100%; }
+
+        /* --- HERO SECTION --- */
+        #hero { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; background: radial-gradient(circle at 10% 20%, rgba(138,43,226,0.1), transparent 40%), radial-gradient(circle at 90% 80%, rgba(75,0,130,0.1), transparent 40%); }
+        #hero .hero-content { max-width: 900px; }
+        #hero h1 { font-size: 3rem; background: var(--accent-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; animation: text-glow 2s ease-in-out infinite alternate; }
+        #hero p { font-size: 1.2rem; color: var(--secondary-text-color); margin: 20px 0; }
+        #hero img { width: 200px; height: 200px; border-radius: 50%; border: 5px solid var(--accent-color); box-shadow: 0 0 30px rgba(138,43,226,0.5); animation: float 4s ease-in-out infinite; }
+
+        @keyframes text-glow { from { text-shadow: 0 0 5px #8A2BE2; } to { text-shadow: 0 0 20px #4B0082; } }
+        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+        /* --- SECTIONS --- */
+        section { padding: 80px 0; overflow: hidden; }
+        section h2 { font-size: 2.5rem; font-weight: 700; text-align: center; margin-bottom: 50px; position: relative; }
+        section h2::after { content: ''; display: block; width: 60px; height: 4px; background: var(--accent-gradient); border-radius: 2px; margin: 10px auto 0; }
+
+        /* --- ABOUT --- */
+        #about p { color: var(--secondary-text-color); margin-bottom: 20px; }
+        .skills-list { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+        .skills-list li { background-color: var(--card-bg-color); color: var(--primary-text-color); padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; border: 1px solid var(--card-border-color); transition: all 0.3s ease; }
+        .skills-list li:hover { background-color: var(--accent-color); border-color: var(--accent-color); transform: translateY(-3px); }
+
+        /* --- PROJECTS --- */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 30px; }
+        .project-card { background-color: var(--card-bg-color); border: 1px solid var(--card-border-color); border-radius: 10px; overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .project-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .project-card img { width: 100%; height: 200px; object-fit: cover; display: block; }
+        .project-info { padding: 20px; }
+        .project-info h3 { font-size: 1.3rem; margin-bottom: 10px; }
+        .project-info p { color: var(--secondary-text-color); margin-bottom: 15px; font-size: 0.95rem; }
+        .project-skills { display: flex; flex-wrap: wrap; gap: 8px; }
+        .project-skills span { font-size: 0.8rem; background-color: rgba(138,43,226,0.2); color: var(--accent-color); padding: 5px 10px; border-radius: 15px; }
+
+        /* --- ACHIEVEMENTS --- */
+        .achievements-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 30px; }
+        .achievement-card { background-color: var(--card-bg-color); padding: 30px; text-align: center; border-radius: 8px; border: 1px solid var(--card-border-color); transition: transform 0.3s ease; }
+        .achievement-card:hover { transform: translateY(-5px); }
+        .achievement-card i { font-size: 3rem; background: var(--accent-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 15px; }
+
+        /* --- CONTACT --- */
+        #contact ul { list-style: none; margin-top: 20px; padding: 0; display: flex; flex-direction: column; gap: 10px; color: var(--secondary-text-color); }
+        #contact a { color: var(--accent-color); }
+        #contact li i { margin-right: 10px; }
+
+        /* --- FOOTER --- */
+        footer { text-align: center; padding: 40px 0; background-color: var(--card-bg-color); border-top: 1px solid var(--card-border-color); }
+
+        /* --- ANIMATIONS --- */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* --- RESPONSIVE --- */
+        @media(max-width:768px){nav ul{flex-direction:column;gap:15px;} #hero img{width:150px;height:150px;}}
+    </style>
 </head>
 <body>
-  <!-- Header -->
-  <header>
+
+<header id="main-header">
     <div class="container">
-      <h1 class="fade-in">Abdul Razzaq</h1>
-      <p class="tagline fade-in">Area Visual Merchandiser | Data Visualization Designer | Power BI Enthusiast</p>
-      <nav>
-        <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#achievements">Achievements</a></li>
-          <li><a href="#contact">Contact</a></li>
+        <h1 class="fade-in">Abdul Razzaq</h1>
+        <p class="tagline fade-in">Area Visual Merchandiser | Data Visualization Designer | Power BI Enthusiast</p>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section id="hero">
+    <div class="hero-content">
+        <h1 class="fade-in">Hi, I'm Abdul Razzaq</h1>
+        <p class="fade-in">Blending creative visual merchandising with actionable Power BI insights</p>
+        <img src="mypic.jpeg" alt="Abdul Razzaq Profile Picture" class="fade-in">
+    </div>
+</section>
+
+<section id="about">
+    <div class="container fade-in">
+        <h2>About Me</h2>
+        <p>
+            I’m <strong>Abdul Razzaq</strong>, a creative professional with 11+ years in 
+            <strong>Visual Merchandising</strong> and <strong>Data Visualization</strong>.  
+            I design immersive in-store experiences while leveraging <strong>Power BI</strong>, <strong>Excel</strong>, and <strong>Tableau</strong> 
+            to deliver actionable retail insights. My toolkit includes <strong>CorelDRAW, Illustrator, Photoshop</strong>, blending design with data.
+        </p>
+        <ul class="skills-list">
+            <li>Visual Merchandising</li>
+            <li>Window Concepts</li>
+            <li>Store Launches</li>
+            <li>Power BI</li>
+            <li>Excel & Tableau</li>
+            <li>Campaign Strategy</li>
+            <li>CorelDRAW / Illustrator / Photoshop</li>
+            <li>Team Training & SOPs</li>
         </ul>
-      </nav>
     </div>
-  </header>
+</section>
 
-  <!-- About -->
-  <section id="about" class="section">
+<section id="projects">
     <div class="container fade-in">
-      <h2>About Me</h2>
-      <p>
-        I’m <strong>Abdul Razzaq</strong>, a creative and results-driven professional with 
-        11+ years of experience in <strong>Visual Merchandising</strong> and 
-        <strong>Data Visualization</strong>.  
-        I specialize in <em>window displays, seasonal campaigns, and store launches</em>, 
-        while also leveraging <strong>Power BI</strong>, <strong>Tableau</strong>, and 
-        <strong>Excel</strong> to design interactive dashboards and data stories.  
-        My toolkit includes <strong>CorelDRAW, Illustrator, Photoshop, Adobe Suite, and PowerPoint</strong>, 
-        blending design with data for impactful business presentations.
-      </p>
-    </div>
-  </section>
+        <h2>Featured Projects</h2>
+        <div class="projects-grid">
 
-  <!-- Projects -->
-  <section id="projects" class="section">
-    <div class="container">
-      <h2 class="fade-in">Featured Projects</h2>
-      <div class="projects-grid">
-
-        <!-- Project 1 -->
-        <div class="project-card fade-in">
-          <div class="project-image">
-            <img src="https://i.ibb.co/xCFxQGv/vm-display.jpg" alt="Visual Merchandising Project">
-          </div>
-          <div class="project-info">
-            <h3>Seasonal Campaigns & Window Displays</h3>
-            <p>
-              Developed creative seasonal campaigns and mannequin styling guides across 28+ stores, 
-              ensuring consistent brand aesthetics and customer engagement.
-            </p>
-            <div class="project-skills">
-              <span>Visual Merchandising</span>
-              <span>Creative Design</span>
-              <span>Store Launch</span>
+            <div class="project-card fade-in">
+                <img src="https://i.ibb.co/xCFxQGv/vm-display.jpg" alt="Visual Merchandising Project">
+                <div class="project-info">
+                    <h3>Seasonal Campaigns & Window Displays</h3>
+                    <p>Developed seasonal campaigns and mannequin styling guides across 28+ stores for consistent brand aesthetics and customer engagement.</p>
+                    <div class="project-skills">
+                        <span>Visual Merchandising</span>
+                        <span>Creative Design</span>
+                        <span>Store Launch</span>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
 
-        <!-- Project 2 -->
-        <div class="project-card fade-in">
-          <div class="project-image">
-            <img src="https://i.ibb.co/42hPGsK/powerbi-dashboard.jpg" alt="Power BI Dashboard">
-          </div>
-          <div class="project-info">
-            <h3>Power BI Dashboard: Tailwind Traders</h3>
-            <p>
-              Designed and developed an interactive Power BI dashboard integrating multiple 
-              datasets to track sales, profitability, and retail performance.  
-              Delivered insights with drill-through analytics, KPI cards, slicers, 
-              and advanced DAX measures for executive reporting.
-            </p>
-            <div class="project-skills">
-              <span>Power BI</span>
-              <span>DAX</span>
-              <span>SQL</span>
-              <span>Dashboard Design</span>
+            <div class="project-card fade-in">
+                <img src="https://i.ibb.co/42hPGsK/powerbi-dashboard.jpg" alt="Power BI Dashboard">
+                <div class="project-info">
+                    <h3>Power BI Dashboard: Tailwind Traders</h3>
+                    <p>Interactive Power BI dashboard integrating multiple datasets to track sales, profitability, and retail performance with advanced DAX measures.</p>
+                    <div class="project-skills">
+                        <span>Power BI</span>
+                        <span>DAX</span>
+                        <span>SQL</span>
+                        <span>Dashboard Design</span>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
 
-        <!-- Project 3 -->
-        <div class="project-card fade-in">
-          <div class="project-image">
-            <img src="https://i.ibb.co/3v0XbWz/team-training.jpg" alt="Team Training">
-          </div>
-          <div class="project-info">
-            <h3>Team Training & SOP Rollouts</h3>
-            <p>
-              Conducted training for Store Visual Merchandisers and rolled out SOPs 
-              to ensure consistent execution of brand guidelines across regions.
-            </p>
-            <div class="project-skills">
-              <span>Training</span>
-              <span>Leadership</span>
-              <span>SOPs</span>
+            <div class="project-card fade-in">
+                <img src="https://i.ibb.co/3v0XbWz/team-training.jpg" alt="Team Training">
+                <div class="project-info">
+                    <h3>Team Training & SOP Rollouts</h3>
+                    <p>Trained Store Visual Merchandisers and rolled out SOPs to ensure consistent execution of brand guidelines across regions.</p>
+                    <div class="project-skills">
+                        <span>Training</span>
+                        <span>Leadership</span>
+                        <span>SOPs</span>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
 
-      </div>
+        </div>
     </div>
-  </section>
+</section>
 
-  <!-- Achievements -->
-  <section id="achievements" class="section">
-    <div class="container">
-      <h2 class="fade-in">Key Achievements</h2>
-      <div class="achievements-grid">
-
-        <div class="achievement-card fade-in">
-          <i class="bi bi-shop-window"></i>
-          <h3>40+ Stores Managed</h3>
-          <p>
-            Successfully launched and optimized over 40 stores with effective 
-            layout strategies, enhancing both sales and customer experience.
-          </p>
-        </div>
-
-        <div class="achievement-card fade-in">
-          <i class="bi bi-bar-chart-line-fill"></i>
-          <h3>Data-Driven Visuals</h3>
-          <p>
-            Created interactive Power BI dashboards, including the 
-            <strong>Tailwind Traders project</strong>, delivering actionable 
-            insights through advanced data visualization.
-          </p>
-        </div>
-
-        <div class="achievement-card fade-in">
-          <i class="bi bi-megaphone-fill"></i>
-          <h3>Campaign Leadership</h3>
-          <p>
-            Spearheaded regional campaigns, mall activities, and 
-            promotional events to boost brand visibility and engagement.
-          </p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="section">
+<section id="achievements">
     <div class="container fade-in">
-      <h2>Contact</h2>
-      <p>
-        Interested in collaborating or learning more about my work?  
-        Let’s connect!
-      </p>
-      <ul>
-        <li><i class="bi bi-envelope"></i> abdul.razzaq@example.com</li>
-        <li><i class="bi bi-telephone"></i> +91-XXXXXXXXXX</li>
-        <li><i class="bi bi-linkedin"></i> <a href="#">linkedin.com/in/abdulrazzaq</a></li>
-        <li><i class="bi bi-geo-alt"></i> Kolkata, India</li>
-      </ul>
+        <h2>Key Achievements</h2>
+        <div class="achievements-grid">
+            <div class="achievement-card fade-in">
+                <i class="bi bi-shop-window"></i>
+                <h3>40+ Stores Managed</h3>
+                <p>Successfully launched and optimized over 40 stores with effective layout strategies enhancing sales and customer experience.</p>
+            </div>
+            <div class="achievement-card fade-in">
+                <i class="bi bi-bar-chart-line-fill"></i>
+                <h3>Data-Driven Visuals</h3>
+                <p>Created interactive Power BI dashboards including Tailwind Traders project, delivering actionable insights through visualization.</p>
+            </div>
+            <div class="achievement-card fade-in">
+                <i class="bi bi-megaphone-fill"></i>
+                <h3>Campaign Leadership</h3>
+                <p>Spearheaded regional campaigns, mall activities, and promotional events to boost brand visibility and engagement.</p>
+            </div>
+        </div>
     </div>
-  </section>
+</section>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <p>© 2025 Abdul Razzaq | Portfolio</p>
+<section id="contact">
+    <div class="container fade-in">
+        <h2>Contact</h2>
+        <p>Interested in collaborating or learning more about my work? Let’s connect!</p>
+        <ul>
+            <li><i class="bi bi-envelope"></i> abdul.razzaq@example.com</li>
+            <li><i class="bi bi-telephone"></i> +91-XXXXXXXXXX</li>
+            <li><i class="bi bi-linkedin"></i> <a href="#">linkedin.com/in/abdulrazzaq</a></li>
+            <li><i class="bi bi-geo-alt"></i> Kolkata, India</li>
+        </ul>
     </div>
-  </footer>
+</section>
+
+<footer>
+    <div class="container">
+        <p>© 2025 Abdul Razzaq | Portfolio</p>
+    </div>
+</footer>
+
+<script>
+    // Scroll header effect
+    const header = document.getElementById('main-header');
+    window.addEventListener('scroll', () => { window.scrollY > 50 ? header.classList.add('scrolled') : header.classList.remove('scrolled'); });
+
+    // Fade-in animation on scroll
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOptions = { threshold: 0.2, rootMargin: "0px 0px -50px 0px" };
+    const appearOnScroll = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+        });
+    }, appearOptions);
+    faders.forEach(fader => appearOnScroll.observe(fader));
+</script>
 </body>
 </html>
